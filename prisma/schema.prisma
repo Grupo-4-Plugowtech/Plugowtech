@@ -12,3 +12,83 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model users{
+  uuid Int @id @default(autoincrement())
+  name String
+  lastname String
+  email String
+  password String
+  token_password  String
+  phone String
+  cpf String @unique 
+  birth_date String
+  approved_terms String
+  role String
+  profession String
+  company_id String @unique
+  crate_at String
+  updated_at String
+
+}
+
+model access_log{
+  uuid Int @id @default(autoincrement())
+  user_id String @unique
+  ip_address String @unique
+  create_at String
+  updated_at String
+
+}
+
+model profession{
+  uuid Int @id @default(autoincrement())
+  name String
+  create_at String
+  updated_at String
+}
+
+model score_permission{
+  uuid Int @id @default(autoincrement())
+  company_id String
+  uder_id String @unique
+  points String 
+  status String
+  description String
+  create_at String
+  uptadet_at String
+}
+
+model score{
+  uuid Int @id @default(autoincrement())
+  user_id String @unique
+  points String
+  description String
+  create_at String
+  uptadet_at String
+
+}
+
+model company{
+  uuid Int @id @default(autoincrement())
+  name String
+  email String
+  cnpj String @unique
+  create_at String
+  uptadet_at String
+}
+
+model imagens_company{
+  uuid Int @id @default(autoincrement())
+  companu_id String
+  description String
+  url String
+  position String
+  is_visible String
+  create_at String
+  uptadet_at String
+}
+
+
+
+
