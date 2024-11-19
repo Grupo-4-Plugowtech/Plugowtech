@@ -1,4 +1,4 @@
-import { user } from "../models/user/userModels.js";
+import { user } from "../../models/user/userModels.js";
 
 export default async function handler(req, res){
     if(req.method === 'GET'){

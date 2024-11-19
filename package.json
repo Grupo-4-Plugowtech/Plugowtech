@@ -5,10 +5,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-      "generate": "prisma generate",
-      "build": "prisma generate",
-      "dev": "nodemon server.js",
-      "start": "node server.js"
+    "generate": "prisma generate",
+    "build": "prisma generate",
+    "dev": "vercel dev"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +21,7 @@
     "nodemon": "^3.1.7",
     "prisma": "^5.22.0",
     "uuid": "^11.0.3",
+    "vercel": "^39.0.4",
     "zod": "^3.23.8"
   }
 }
