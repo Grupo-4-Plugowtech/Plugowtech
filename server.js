@@ -1,5 +1,5 @@
 import express from 'express';
-import handler from './api/users/users.js';
+import handler from './api/users.js';
 
 const app = express();
 app.use(express.json());
