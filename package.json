@@ -1,0 +1,27 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+      "generate": "prisma generate",
+      "build": "prisma generate",
+      "dev": "nodemon server.js",
+      "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@faker-js/faker": "^9.2.0",
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.1",
+    "faker-js": "^1.0.0",
+    "nodemon": "^3.1.7",
+    "prisma": "^5.22.0",
+    "uuid": "^11.0.3",
+    "zod": "^3.23.8"
+  }
+}

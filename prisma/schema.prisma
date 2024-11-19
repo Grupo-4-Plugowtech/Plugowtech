@@ -1,0 +1,112 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Cambia el proveedor si usas otro (e.g., mysql)
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(uuid()) 
+  name            String
+  lastname        String
+  email           String    @unique
+  password        String
+  token_password  String
+  phone           String
+  cpf             String    @unique
+  city            String
+  birth_date      DateTime
+  approved_terms  Boolean
+  role            Role
+  professionId    String?
+  profession      Profession? @relation(fields: [professionId], references: [id])
+  companyId       String
+  company         Company?    @relation(fields: [companyId], references: [id])
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  accessLogs      AccessLog[]
+  scores          Score[]
+  scorePermissions ScorePermission[]
+}
+
+model Profession {
+  id        String   @id @default(uuid()) 
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users     User[]
+}
+
+model Company {
+  id        String   @id @default(uuid()) 
+  name      String   @unique
+  email     String   @unique
+  cnpj      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users      User[]
+  images     ImagesCompany[]
+  scorePermissions ScorePermission[]
+}
+
+model Score {
+  id        String   @id @default(uuid()) 
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  points    Int
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ScorePermission {
+  id          String   @id @default(uuid()) 
+  companyId   String
+  company     Company  @relation(fields: [companyId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  points      Int
+  status      StatusType
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ImagesCompany {
+  id          String   @id @default(uuid()) 
+  companyId   String
+  company     Company  @relation(fields: [companyId], references: [id])
+  description String
+  url         String
+  position    Int
+  isVisible   Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AccessLog {
+  id        String   @id @default(uuid()) 
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  ipAddress String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  admin
+  company
+  associated
+}
+
+enum StatusType {
+  pending
+  approved
+  rejected
+}
