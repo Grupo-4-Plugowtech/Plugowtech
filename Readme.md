@@ -1,5 +1,8 @@
-## Estrutura inicial de pastas
+# Estrutura inicial do projeto
 
+## 📂 Pastas
+
+```bash
 ├── api/
 │   └── users/
 │       └── index.js         # Endpoints para usuarios (Controlador)
@@ -15,23 +18,22 @@
 │   └── auth.js             # Middleware para autenticación
 ├── utils/
 │   └── prisma.js           # Conexión con Prisma
-│   └── seed.js             # Función para copular dados no db.
-|__ server.js               # Servidor básico temporal para testes da api
+│   └── seed.js             # Función para poblar la base de datos
+└── server.js               # Servidor básico temporal para pruebas de la API
+```
+## 🚀 Comandos disponiveis
 
-## Commandos
-1. npm run dev              # Executar o servidor na porta 3000
-1. node utils/seed.js       # Para copular dados fiticios no db. (Os dados já estão no banco de dados) [Opcional]
+1. **Desenvolver localmente:**
+   - `npm run dev` - Executa o servidor de prova na porta `3000`.
+2. **Copular base de dados:**
+   - `node utils/seed.js` - Para copular databse com dados fiticios (opcional).
 
+## 🌐 Metodos e acceso a rotas disponiveis
 
-## Accesso de rotas disponiveis (Exemplos de consultas)
-Método GET padrão a traves de url no browser
-
-Obter dados de todos os úsuarios ---> http://localhost:3000/api/users 
-Obter dados de um úsuario pelo id ---> http://localhost:3000/api/users/0afa8783-e285-4892-873d-cd0c5ccc31e9
+Método GET padrão no navegador: 
+    Obter dados de todos os úsuarios 👉🏻 http://localhost:3000/api/users 
+    Obter dados de um úsuario pelo id 👉🏻 http://localhost:3000/api/users/0afa8783-e285-4892-873d-cd0c5ccc31e9
 
 Métodos POST, UPDATE e DELETE disponiveis a traves de ferramentas para test de API
-1. Insomnia
-2. Postman
-
-
-
+1. Insomnia **Download** here 👉🏻 https://docs.insomnia.rest/insomnia/install
+2. Postman **Download** here 👉🏻 https://www.postman.com/downloads/
