@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "prisma generate",
-    "postinstall": "prisma generate",
+    "build": "npx prisma generate && next build",
     "dev": "vercel dev"
   },
   "author": "",
