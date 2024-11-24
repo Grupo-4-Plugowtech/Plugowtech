@@ -3,7 +3,15 @@ import prisma from "../../utils/prisma.js";
 export const userModels = {
     getAll: async () => {
         try {
-            const usersAll = await prisma.user.findMany();
+            const usersAll = await prisma.user.findMany({
+                include: {
+                    company: {
+                        select: {
+                            name: true,
+                        }
+                    }
+                }
+            });
             return usersAll;
         } catch (error) {
             console.error('Error while fetching all users:', error);
@@ -27,6 +35,23 @@ export const userModels = {
         } catch (error) {
             console.error(`Error while fetching user with ID ${id}:`, error);
             throw new Error('Could not fetch user with that ID');
+        }
+    },
+
+    getByEmail: async(email) => {
+        try {
+
+            const user = await prisma.user.findUnique({
+                where: {
+                    email: email
+                }
+            })
+
+            return user
+            
+        } catch (error) {
+            console.error('Error getting user by email:', error)
+            throw new Error(`Could not fetch user by email`)
         }
     },
 

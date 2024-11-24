@@ -27,7 +27,6 @@ model User {
   company         Company?    @relation(fields: [companyId], references: [id])
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
-
   accessLogs      AccessLog[]
   scores          Score[]
   scorePermissions ScorePermission[]
@@ -38,7 +37,6 @@ model Profession {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   users     User[]
 }
 
@@ -49,7 +47,6 @@ model Company {
   cnpj      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   users      User[]
   images     ImagesCompany[]
   scorePermissions ScorePermission[]

@@ -1,5 +1,6 @@
 import express from 'express';
-import usersHandler from './api/users/index.js'
+import usersHandler from './api/users/index.js';
+import companyHanlder from './api/company/index.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -12,6 +13,8 @@ app.get('/api/users/:id', usersHandler);
 app.post('/api/users', usersHandler);
 app.put('/api/users/:id', usersHandler);
 app.delete('/api/users/:id', usersHandler);
+
+app.get('/api/company', companyHanlder )
 
 
 
