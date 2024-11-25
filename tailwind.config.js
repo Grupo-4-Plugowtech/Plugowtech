@@ -2,19 +2,8 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {
-      colors: {
-        'principal': '#2C2C2C'
-
-      },
-
-      backgroundImage: {
-        baner1: "url('../src/img/fundo/Baner1.svg')",
-        parcerias: "url('../src/img/fundo/parcerias.svg')",
-        premiação: "url('../src/img/fundo/premiaçao.svg')",
-    }
-      
-    },
+    extend: {},
   },
   plugins: [],
 }
+
