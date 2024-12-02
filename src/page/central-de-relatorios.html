@@ -5,73 +5,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/src/output.css" rel="stylesheet">
-
-    <title>CentraldeRelatório</title>
+    <title>Central de Relatório</title>
 </head>
 
-<body>
-    <header class="flex items-center px-8 py-4 relative ">
-
-        <img src="/src/img/logo.svg" alt="Logo" class="mx-auto  ">
-
+<body class="flex flex-col items-center min-h-screen h-full max-w-screen-xl w-full px-4 mx-auto bg-gray-50">
+    <!-- Navigation -->
+    <nav class="flex justify-end w-full py-4 px-4">
         <button
-            class="border border-black rounded-lg px-6 py-2 font-semibold text-sm  right-8 top-1/2 transform -translate-y-1/2 mb-[90px]">
+            class="border border-black rounded-lg px-6 py-2 font-semibold text-sm">
             HOME
         </button>
-    </header>
+    </nav>
 
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <section>
-            <h3 class="text-2xl font-bold mb-8">
-                Central de relatórios
-            </h3>
+    <!-- Main Content -->
+    <main class="grid gap-12 place-items-center max-w-screen-xl w-full">
+        <!-- Logo -->
+        <div class="flex justify-center">
+            <img src="/src/img/logo.svg" alt="Logo" class="max-w-full h-auto">
+        </div>
+
+        <!-- Content -->
+        <section class="flex flex-col justify-center gap-8 w-full max-w-5xl md:flex-row">
+            <!-- Title -->
+            <div class="flex-1 w-full text-center">
+                <h3 class="text-2xl font-bold">
+                    Central de relatórios
+                </h3>
+            </div>
+
+            <!-- Cards -->
+            <div class="flex-1 flex flex-col gap-8">
+                <!-- Card 1 -->
+                <article class="flex items-center border rounded-lg shadow-lg w-full px-4 py-3 bg-white">
+                    <img src="/src/img/icons/seta.svg" alt="seta para baixo" class="w-6 h-6">
+                    <div class="px-2 flex-1">
+                        <p>Pontuação por empresa</p>
+                    </div>
+                    <label for="pontuacao-empresa" class="ml-auto flex items-center">
+                        <input id="pontuacao-empresa" type="radio"
+                            class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
+                    </label>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="flex items-center border rounded-lg shadow-lg w-full px-4 py-3 bg-white">
+                    <img src="/src/img/icons/seta.svg" alt="seta para baixo" class="w-6 h-6">
+                    <div class="px-2 flex-1">
+                        <p>Pontuação por colaborador</p>
+                    </div>
+                    <label for="pontuacao-colaborador" class="ml-auto flex items-center">
+                        <input id="pontuacao-colaborador" type="radio"
+                            class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
+                    </label>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="flex items-center border rounded-lg shadow-lg w-full px-4 py-3 bg-white">
+                    <img src="/src/img/icons/seta.svg" alt="seta para baixo" class="w-6 h-6">
+                    <div class="px-2 flex-1">
+                        <p>Média de pontos por empresa/colaborador</p>
+                    </div>
+                    <label for="media-pontos" class="ml-auto flex items-center">
+                        <input id="media-pontos" type="radio"
+                            class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
+                    </label>
+                </article>
+
+                <!-- Buttons de download -->
+                <section class="flex flex-wrap gap-4 justify-center mt-8 w-full">
+                    <button class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-900 transition">
+                        Baixar em Word
+                    </button>
+                    <button class="bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 transition">
+                        Baixar em Excel
+                    </button>
+                    <button class="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 transition">
+                        Baixar em PDF
+                    </button>
+                </section>
+            </div>
         </section>
-    
-        <section class="space-y-4">
-            <!-- Card 1 -->
-            <article class="flex items-center gap-2 border shadow-xl rounded p-3 w-[552px] h-[74px]">
-                <img src="/src/img/icons/seta.svg" alt="seta para baixo">
-                <div class="px-1 flex-1">
-                    <p>Pontuação por empresa</p>
-                </div>
-                <label for="pontuacao-empresa" class="ml-auto flex items-center space-x-2">
-                    <input id="pontuacao-empresa" type="radio" class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
-                </label>
-            </article>
-    
-            <!-- Card 2 -->
-            <article class="flex items-center gap-2 border shadow-xl rounded p-3 w-[552px] h-[74px]">
-                <img src="/src/img/icons/seta.svg" alt="seta para baixo">
-                <div class="px-1 flex-1">
-                    <p>Pontuação por colaborador</p>
-                </div>
-                <label for="pontuacao-colaborador" class="ml-auto flex items-center space-x-2">
-                    <input id="pontuacao-colaborador" type="radio" class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
-                </label>
-            </article>
-    
-            <!-- Card 3 -->
-            <article class="flex items-center gap-2 border shadow-xl rounded p-3 w-[552px] h-[74px]">
-                <img src="/src/img/icons/seta.svg" alt="seta para baixo">
-                <div class="px-1 flex-1">
-                    <p>Média de pontos por empresa/colaborador</p>
-                </div>
-                <label for="media-pontos" class="ml-auto flex items-center space-x-2">
-                    <input id="media-pontos" type="radio" class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
-                </label>
-            </article>
-        </section>
-    
-        <!-- Botões de download -->
-        <section class="col-span-2 flex gap-4 justify-center mt-8">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded">Baixar em Word</button>
-            <button class="bg-green-500 text-white px-4 py-2 rounded">Baixar em Excel</button>
-            <button class="bg-red-500 text-white px-4 py-2 rounded">Baixar em PDF</button>
-        </section>
+
+
     </main>
-    
-
-
 </body>
 
 </html>
