@@ -14,16 +14,16 @@
   "description": "",
   "dependencies": {
     "@faker-js/faker": "^9.2.0",
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^6.0.0",
     "bcryptjs": "^2.4.3",
     "express": "^4.21.1",
     "faker-js": "^1.0.0",
-    "prisma": "^5.22.0",
     "uuid": "^11.0.3",
     "vercel": "^39.0.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "prisma": "^6.0.0"
   }
 }

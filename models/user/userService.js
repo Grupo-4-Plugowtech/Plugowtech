@@ -1,11 +1,15 @@
 import { userModels } from "./userModels.js";
 
 export const userService = {
-    getAllUsers: async () => {
+    getAllUsers: async (pagination) => {
+        console.log(JSON.stringify(pagination, null, 2));
         try {
-            return await userModels.getAll();
+            // Llamada al modelo con el parámetro recibido
+            const users = await userModels.getAll(pagination);
+
+            return users;  // Devolvemos los usuarios
         } catch (error) {
-            throw error;
+            throw error;  // En caso de error, lo lanzamos nuevamente
         }
     },
 

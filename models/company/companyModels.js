@@ -47,7 +47,7 @@ export const companyModels = {
 
     create: async (companyData) => {
         try {
-            const newUser = await prisma.user.create({
+            const newUser = await prisma.company.create({
                 data: companyData 
             });
             return newUser;

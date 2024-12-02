@@ -1,9 +1,17 @@
 import prisma from "../../utils/prisma.js";
 
 export const userModels = {
-    getAll: async () => {
+    getAll: async ({skip, take, orderBy, order }) => {
+
         try {
+            const totalUsers = await prisma.user.count();
+
             const usersAll = await prisma.user.findMany({
+                skip,
+                take,
+                orderBy: {
+                    [orderBy]: order,
+                },
                 include: {
                     company: {
                         select: {
@@ -12,7 +20,15 @@ export const userModels = {
                     }
                 }
             });
-            return usersAll;
+            return {
+                data: usersAll,
+                metadata: {
+                    skip,
+                    take,
+                    totalUsers,
+                    totalPages: Math.ceil(totalUsers / take),
+                }
+            }
         } catch (error) {
             console.error('Error while fetching all users:', error);
             throw new Error('Could not fetch users');
@@ -20,6 +36,7 @@ export const userModels = {
     },
 
     getById: async (id) => {
+        console.log(`id: ${id}`);
         try {
             const userId = await prisma.user.findUnique({
                 where: {
@@ -90,6 +107,7 @@ export const userModels = {
                     id: id
                 }
             });
+            console.log(deletedUser)
 
             return deletedUser;
         } catch (error) {

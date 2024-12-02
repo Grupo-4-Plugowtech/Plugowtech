@@ -1,6 +1,11 @@
 import express from 'express';
-import usersHandler from './api/users/index.js';
-import companyHanlder from './api/company/index.js';
+import usersHandler from './api/admin/users/index.js';
+import companiesHandler from './api/admin/companies/index.js';
+import accessLogsHandler from './api/admin/access-logs/index.js'
+
+
+
+import companyHandler from './api/company/index.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -8,16 +13,25 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/api/users', usersHandler);
-app.get('/api/users/:id', usersHandler);
-app.post('/api/users', usersHandler);
-app.put('/api/users/:id', usersHandler);
-app.delete('/api/users/:id', usersHandler);
+// Rotas para o usuário com rol admin (Administrador-OSNIR)
+app.get('/api/admin/users/:id', usersHandler);
+app.get('/api/admin/users', usersHandler);
+app.post('/api/admin/users', usersHandler);
+app.put('/api/admin/users/:id', usersHandler);
+app.delete('/api/admin/users/:id', usersHandler);
 
-app.get('/api/company', companyHanlder )
+app.get('/api/admin/companies', companiesHandler);
+app.get('/api/admin/companies/:id', companiesHandler);
+app.post('/api/admin/companies', companiesHandler);
+app.put('/api/admin/companies/:id', companiesHandler);
+app.delete('/api/admin/companies/:id', companiesHandler);
 
 
+app.get('/api/admin/access-logs', accessLogsHandler )
 
+
+//Rotas para o usúario com o rol company (Lojas)
+app.get('/api/company', companyHandler )
 
 
 app.listen(PORT, () => {
