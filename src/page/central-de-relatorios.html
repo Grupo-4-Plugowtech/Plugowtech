@@ -10,68 +10,88 @@
 </head>
 
 <body>
-    <header class="flex items-center px-8 py-4 relative ">
+    <header class=" md:container flex justify-between items-center  px-8 py-4 relative ">
 
-        <img src="/src/img/logo.svg" alt="Logo" class="mx-auto  ">
+        <span class="invisible "></span>
 
-        <button
-            class="border border-black rounded-lg px-6 py-2 font-semibold text-sm  right-8 top-1/2 transform -translate-y-1/2 mb-[90px]">
-            HOME
-        </button>
+        <div>
+            <img src="/src/img/logo.svg" alt="Logo" class="mx-auto">
+        </div>
+
+        <div class=" flex  flex-col justify-end ">
+            <button class="border border-black rounded-lg px-6 py-2 font-semibold text-sm mb-28">
+                HOME
+            </button>
+        </div>
+
+
     </header>
 
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <main class="grid grid-cols-1 gap-8 max-w-4xl mx-auto p-4 md:grid-cols-2">
+        <!-- Título -->
         <section>
-            <h3 class="text-2xl font-bold mb-8">
+            <h3 class="text-2xl font-bold mb-8 md:mb-0 sm:text-center">
                 Central de relatórios
             </h3>
         </section>
-    
+
+        <!-- Lista de cartões -->
         <section class="space-y-4">
             <!-- Card 1 -->
-            <article class="flex items-center gap-2 border shadow-xl rounded p-3 w-[552px] h-[74px]">
-                <img src="/src/img/icons/seta.svg" alt="seta para baixo">
-                <div class="px-1 flex-1">
-                    <p>Pontuação por empresa</p>
+            <article class="flex items-center gap-4 border shadow rounded-lg p-4 md:w-[552px]">
+                <img src="/src/img/icons/seta.svg" alt="seta para baixo" class="w-6 h-6">
+                <div class="flex-1">
+                    <p class="text-sm sm:text-base">Pontuação por empresa</p>
                 </div>
-                <label for="pontuacao-empresa" class="ml-auto flex items-center space-x-2">
-                    <input id="pontuacao-empresa" type="radio" class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
+                <label class="ml-auto flex items-center">
+                    <input id="pontuacao-empresa" type="radio"
+                        class="appearance-none w-5 h-5 border-2 border-gray-400 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
                 </label>
             </article>
-    
+
             <!-- Card 2 -->
-            <article class="flex items-center gap-2 border shadow-xl rounded p-3 w-[552px] h-[74px]">
-                <img src="/src/img/icons/seta.svg" alt="seta para baixo">
-                <div class="px-1 flex-1">
-                    <p>Pontuação por colaborador</p>
+            <article class="flex items-center gap-4 border shadow rounded-lg p-4 md:w-[552px]">
+                <img src="/src/img/icons/seta.svg" alt="seta para baixo" class="w-6 h-6">
+                <div class="flex-1">
+                    <p class="text-sm sm:text-base">Pontuação por colaborador</p>
                 </div>
-                <label for="pontuacao-colaborador" class="ml-auto flex items-center space-x-2">
-                    <input id="pontuacao-colaborador" type="radio" class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
+                <label class="ml-auto flex items-center">
+                    <input id="pontuacao-colaborador" type="radio"
+                        class="appearance-none w-5 h-5 border-2 border-gray-400 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
                 </label>
             </article>
-    
+
             <!-- Card 3 -->
-            <article class="flex items-center gap-2 border shadow-xl rounded p-3 w-[552px] h-[74px]">
-                <img src="/src/img/icons/seta.svg" alt="seta para baixo">
-                <div class="px-1 flex-1">
-                    <p>Média de pontos por empresa/colaborador</p>
+            <article class="flex items-center gap-4 border shadow rounded-lg p-4 w-full md:w-[552px]">
+                <img src="/src/img/icons/seta.svg" alt="seta para baixo" class="w-6 h-6">
+                <div class="flex-1">
+                    <p class="text-sm sm:text-base">Média de pontos por empresa/colaborador</p>
                 </div>
-                <label for="media-pontos" class="ml-auto flex items-center space-x-2">
-                    <input id="media-pontos" type="radio" class="appearance-none w-6 h-6 border-2 border-gray-500 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
+                <label class="ml-auto flex items-center">
+                    <input id="media-pontos" type="radio"
+                        class="appearance-none w-5 h-5 border-2 border-gray-400 rounded-full checked:bg-blue-500 checked:border-blue-700 transition" />
                 </label>
             </article>
+
+            <!-- Botões de download -->
+            <article class=" flex justify-between md:w-full gap-4 items-center mt-6 ">
+                <button class="bg-blue-500 text-white font-roboto px-6 py-1 rounded w-full md:w-auto text-center">Baixar
+                    em Word</button>
+                <button class="bg-green-500 text-white px-6 py-1 rounded w-full md:w-auto text-center">Baixar em
+                    Excel</button>
+                <button class="bg-red-500 text-white px-6 py-1 rounded w-full md:w-auto text-center ">Baixar em
+                    PDF</button>
+            </article>
         </section>
-    
-        <!-- Botões de download -->
-        <section class="col-span-2 flex gap-4 justify-center mt-8">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded">Baixar em Word</button>
-            <button class="bg-green-500 text-white px-4 py-2 rounded">Baixar em Excel</button>
-            <button class="bg-red-500 text-white px-4 py-2 rounded">Baixar em PDF</button>
-        </section>
+
+
+
     </main>
-    
 
 
+
+
+    <script src="/src/js/relatorio.js"></script>
 </body>
 
 </html>
