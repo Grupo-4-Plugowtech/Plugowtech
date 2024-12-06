@@ -19,20 +19,20 @@
   <!-- Main Content -->
   <main class="grid gap-12 place-items-center max-w-screen-xl">
     <!-- Logo -->
-    <div class="flex justify-center">
-      <img src="/src/img/logo.png" alt="Logo">
+    <div class="flex justify-center py-6 px-6 ">
+      <img src="/src/img/logo.png" alt="Logo" class="w-[300px] h-auto ">
     </div>
 
     <!-- Content -->
     <section class="flex flex-col justify-center gap-8 w-full max-w-5xl md:flex-row">
       <!-- Title -->
-      <div class="flex-1 w-full text-center">
-        <h3 class="text-2xl font-bold">
+      <div class="flex-1 w-full ">
+        <h3 class="text-2xl sm:text-2xl font-bold  md:text-center px-6 ">
           Gerenciamento de pontos
         </h3>
         <br>
 
-        <div class="w-[300px] h-40 md:w-[492px] md:h-64 mx-8 bg-cinza rounded-lg "></div>
+        <div class="w-[300px] h-40 md:w-[492px] md:h-64 mx-6 items-center bg-cinza rounded-lg "></div>
 
 
         <section class="flex flex-wrap gap-4 justify-center  w-full my-8">
@@ -49,6 +49,7 @@
 
       </div>
 
+
       <!-- Cards -->
       <div class="flex-1 flex flex-col gap-8 ">
 
@@ -63,14 +64,14 @@
             
             <!-- Input -->
             <input type="text" id="valorPontos" name="valorPontos" placeholder="100.000 pts"
-                   class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+                   class="w-[284px] md:w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
           </div>
           
-          <!-- Dropdown: Viagem Chile -->
+          <!-- Dropdown: Viagens -->
           <div>
             <label for="viagem" class="block text-sm font-medium text-gray-700 sr-only">Destino</label>
             <select id="viagem" name="viagem"
-              class="w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+              class="md:w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
               <option value="chile">Viagem Milão(Salone Del Mobile) </option>
               <option value="argentina">Viagem Croácia</option>
               <option value="brasil">Viagem Orlando</option>
@@ -85,7 +86,7 @@
           </div>
 
           <!-- Checkboxes: Status -->
-          <div class="flex justify-between items-start w-full p-4">
+          <div class="flex md:justify-between items-start w-full p-4">
             <!-- Checkboxes: Status -->
             <div>
               <span class="block text-sm font-medium text-gray-700">Status</span>
@@ -123,7 +124,7 @@
 
 
         <!-- Buttons de download -->
-        <section class="flex flex-wrap gap-4 justify-center my-8 w-full">
+        <section class="flex flex-wrap gap-4 justify-center my-8 w-full md:items-center">
           <button class="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-900 transition">
             CRIAR NOVO
           </button>
