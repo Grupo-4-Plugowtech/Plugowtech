@@ -84,6 +84,7 @@ export const userModels = {
         }
     },
 
+
     update: async (id, userData) => {
         try {
             const updatedUser = await prisma.user.update({

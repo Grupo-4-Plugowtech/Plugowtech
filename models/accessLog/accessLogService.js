@@ -1,4 +1,4 @@
-import { accessLogModel } from "./accessLog.js";
+import { accessLogModel } from "./accessLogModels.js";
 
 export const accessLogService = {
     getAllAccess: async () => {
