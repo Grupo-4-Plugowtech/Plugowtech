@@ -19,16 +19,17 @@
   </header>
 
   <!-- Layout Principal -->
-  <div class="flex flex-1 overflow-hidden">
+  <div class="flex overflow-hidden">
     <!-- Sidebar -->
-    <aside id="sidebar" class="bg-white shadow-lg w-64 flex-shrink-0 hidden md:block transition-transform transform -translate-x-full md:translate-x-0">
+    <aside id="sidebar" class="bg-white shadow-lg w-64 flex-shrink-0 hidden md:block transition-transform transform -translate-x-full md:translate-x-0 min-h-screen">
       <nav class="p-4 space-y-2">
         <h2 class="text-sm font-bold text-gray-600 uppercase mb-2">Gerenciar</h2>
         <ul>
-          <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-100 text-gray-700">Empresa/Colaborador</a></li>
-          <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-100 text-gray-700">Dashboard</a></li>
-          <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-100 text-gray-700">Pontuações</a></li>
-          <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-100 text-gray-700">Lançamentos</a></li>
+          <li><a href="#" data-page="empresa.html" class="menu-link block py-2 px-4 rounded hover:bg-gray-100 text-gray-700">Empresa/Colaborador</a></li>
+          <li><a href="#" data-page="dashboard.html" class="menu-link block py-2 px-4 rounded hover:bg-gray-100 text-gray-700">Dashboard</a></li>
+          <li><a href="#" data-page="gerenciar-pontuacao.html" class="menu-link block py-2 px-4 rounded hover:bg-gray-100 text-gray-700">Pontuações</a></li>
+          <li><a href="#" data-page="lancamentos.html" class="menu-link block py-2 px-4 rounded hover:bg-gray-100 text-gray-700">Lançamentos</a></li>
+        </ul>
         </ul>
         <h2 class="text-sm font-bold text-gray-600 uppercase mt-4 mb-2">Relatórios</h2>
         <ul>
@@ -38,7 +39,7 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-6 overflow-y-auto">
+    <main class="flex-1 content-center items-center p-6 overflow-y-auto">
       <!-- Filtro -->
       <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 space-y-4 md:space-y-0">
         <h2 class="text-2xl font-semibold text-gray-800">Timeline</h2>
@@ -87,6 +88,32 @@
 
   <!-- JavaScript para o Sidebar -->
   <script>
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const menuLinks = document.querySelectorAll(".menu-link");
+  const mainContent = document.querySelector("main");
+
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const page = event.target.getAttribute("data-page");
+
+      try {
+        // Cargar la página HTML usando fetch
+        const response = await fetch(page);
+        if (!response.ok) throw new Error(`Error al cargar ${page}`);
+
+        const html = await response.text();
+
+        // Reemplazar el contenido de <main>
+        mainContent.innerHTML = html;
+      } catch (error) {
+        console.error(error);
+        mainContent.innerHTML = `<p>Error al cargar la página.</p>`;
+      }
+    });
+  });
+});
     const toggleSidebar = document.getElementById('toggleSidebar');
     const sidebar = document.getElementById('sidebar');
 
