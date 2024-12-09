@@ -4,12 +4,15 @@ import companyController from '../../../controllers/admin/companyController.js';
 
 export default async function companiesHandler(req, res){
     const { id } = req.params;
+    const { searchText } = req.query;
 
     switch (req.method) {
         case 'GET':
           if (id) {
             return companyController.getById(req, res);
-          } else {
+          } else if(searchText){
+            return companyController.getByText(req, res);
+            } else {
             return companyController.getAll(req, res);
           }
         case 'POST':

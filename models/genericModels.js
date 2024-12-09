@@ -1,35 +1,4 @@
 import prisma from '../utils/prisma.js'
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-
-// export const genericModels = {
-//     getAll: async ({ tableName, skip, take, orderBy, order, include = null }) => {
-//         try {
-//             const totalItems = await prisma[tableName].count();
-    
-//             const items = await prisma[tableName].findMany({
-//                 skip,
-//                 take,
-//                 orderBy: {
-//                     [orderBy]: order,
-//                 },
-//                 include,
-//             });
-    
-//             return {
-//                 data: items,
-//                 metadata: {
-//                     skip,
-//                     take,
-//                     totalItems,
-//                     totalPages: Math.ceil(totalItems / take),
-//                 }
-//             };
-//         } catch (error) {
-//             console.error(`Error while fetching data from ${tableName}:`, error);
-//             throw new Error(`Could not fetch data from ${tableName}`);
-//         }
-//     }
-// }
 
 class CustomError extends Error {
     constructor(message, statusCode, source, type) {
@@ -44,16 +13,22 @@ class CustomError extends Error {
     }
 };
 
-const tables = {
+const queryFields = {
     user: [
         { field: "name", mode: "insensitive" },
         { field: "lastname", mode: "insensitive" },
         { field: "email", mode: "insensitive" }, 
-        { field: "city", mode: "insensitive" }, 
+        { field: "city", mode: "insensitive" },
+        { field: "companyId", mode: "insensitive" }, 
         // { field: "role", mode: "insensitive" }, 
         { field: "phone"}, 
         { field: "cpf" },
         
+    ],
+    company: [
+        { field: "email", mode: "insensitive" },
+        { field: "cnpj", mode: "insensitive" },
+        { field: "name", mode: "insensitive" },
     ],
 }
 
@@ -63,8 +38,12 @@ class GenericModels {
         this.tableName = tableName;
     }
 
-    async getByText(searchText, companyId = "f715b2e9-f211-4cfe-8b11-44d194e60596"){
-        const filters = tables[this.tableName].map((config) => {
+    async getByText({ searchText, skip, take, orderBy, order, companyId = null }){
+
+        if(!queryFields[this.tableName]){
+            throw new Error(`Não se encontraram os campos de consultas para ${this.tableName}!`);
+        }
+        const filters = queryFields[this.tableName].map((config) => {
             const condition = {
                 [config.field]: {
                     startsWith: searchText,
@@ -77,20 +56,44 @@ class GenericModels {
             return condition;
         })
 
-        const where = {
+        const whereCLauseFilters = {
             AND: companyId ? [{companyId}] : [],
             OR: filters,
         }
-        const items = await prisma[this.tableName].findMany({
-            where,
-        });
-        return items;
+
+        // const whereClause = companyId ? { companyId } : {};
+        console.log(`From getByText, skip: ${skip}, take: ${take}, orderBy: ${orderBy}, order: ${order}, companyId: ${companyId}, searchText: ${searchText}`);
+
+        const [totalItems, items] = await prisma.$transaction([
+            
+            prisma[this.tableName].count({
+                where: whereCLauseFilters,
+            }),
+            prisma[this.tableName].findMany({
+                where: whereCLauseFilters,
+                skip,
+                take,
+                orderBy: {
+                    [orderBy]: order,
+                },
+            })
+        ]);
+ 
+        return {
+            data: items,
+            metadata: {
+                skip,
+                take,
+                totalItems,
+                totalPages: Math.ceil(totalItems / take),
+            }
+        };
     }
 
     // Obtener todos los elementos con paginación y ordenación
     async getAll({ skip, take, orderBy, order, include = null, companyId = null}) {
 
-        console.log(`TableName: ${this.tableName}`)
+        
         
             const whereClause = companyId ? { companyId } : {};
 
@@ -108,7 +111,7 @@ class GenericModels {
                     include,
                 }),
              ]);
-
+            console.log(`TableName: ${this.tableName}`)
             console.log(`skip: ${skip}, take: ${take}, orderBy: ${orderBy}, totalPages: ${totalItems}`);
     
             return {
@@ -123,16 +126,22 @@ class GenericModels {
     }
 
     // Obtener un elemento por ID
-    async getById(id) {
+    async getById(id, companiId = null ) {
+
+        const whereClause = companiId ? { id, companiId } : { id };
+
             const item = await prisma[this.tableName].findUnique({
-                where: { id: id }
+                where: whereClause,
             });
             return item;
     }
     
 
     // Crear un nuevo elemento
-    async create(data) {
+    async create(data, companyId = null) {
+            if (companyId){
+                data.companyId = companyId;
+            }
             const newItem = await prisma[this.tableName].create({
                 data
             });
@@ -141,18 +150,14 @@ class GenericModels {
     }
 
     // Actualizar un elemento existente
-    async update(id, data) {
-        try {
+    async update(id, data, companyId = null) {
+        const whereClause = companyId ? { id, companyId } : { id };
             const updatedItem = await prisma[this.tableName].update({
-                where: { id: id },
+                where: whereClause,
                 data
             });
 
-            return updatedItem;
-        } catch (error) {
-            console.error(`Error while updating ${this.tableName} with ID ${id}:`, error);
-            throw new Error(`Could not update ${this.tableName}`);
-        }
+            return updatedItem
     }
 
     // Eliminar un elemento por ID
@@ -175,7 +180,7 @@ export default GenericModels;
 // },
 // });
 
-// const tables = {
+// const queryFields = {
 //     user: [
 //         { name: { startsWith: searchText, mode: "insensitive" } }, // Busca nombres que inicien con el texto
 //         { cpf: { startsWith: searchText } }, // Busca CPFs que inicien con el texto

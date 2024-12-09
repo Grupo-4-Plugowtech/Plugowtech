@@ -10,6 +10,17 @@ class CompanyService {
         return this.model.tableName; // Exponemos el `tableName`
     }
 
+    async getByText(options){
+        try {
+            const items = await this.model.getByText(options);
+
+            return items;
+            
+        } catch (error) {
+            throw error;
+        }
+    }
+
     // Método para obtener todos los usuarios
     async getAll({ skip, take, orderBy, order }) {
 

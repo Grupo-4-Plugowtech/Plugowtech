@@ -59,15 +59,15 @@ const schema = {
     name: z.string().min(1, { message: "O nome é obrigatorio" }),
     email: z.string().min(1, { message: "O campo email é obrigatorio" }).email("O email é invalido"),
     cnpj: z.string()
-        .superRefine((value, ctx) => {
-          console.log(`CNPJ: ${value}`)
-      if (!isCNPJ(value)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "O CNPJ é invalido.",
-        });
-      }
-  }),
+      //   .superRefine((value, ctx) => {
+      //     console.log(`CNPJ: ${value}`)
+      // if (!isCNPJ(value)) {
+      //   ctx.addIssue({
+      //     code: z.ZodIssueCode.custom,
+      //     message: "O CNPJ é invalido.",
+      //   });
+      // }
+  // }),
     
 
   })
@@ -84,6 +84,7 @@ export const paginationSchema = (option) => {
       take: z.preprocess((value) => (value === undefined || value === null ? 5 : parseInt(value, 10)), z.number().int().positive().min(1).max(100, { message: "Take value must be between 1 and 100" })),
       orderBy: orderByOptions[option],
       order: z.enum(['asc', 'desc']).optional().default('desc'),
+      searchText: z.string().optional(),
     });
 
 } 

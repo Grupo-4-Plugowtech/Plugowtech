@@ -77,9 +77,9 @@ class UserService {
         return this.model.tableName; // Exponemos el `tableName`
     }
 
-    async getByText(searchText){
+    async getByText(options){
         try {
-            const items = await this.model.getByText(searchText);
+            const items = await this.model.getByText(options);
 
             return items;
             

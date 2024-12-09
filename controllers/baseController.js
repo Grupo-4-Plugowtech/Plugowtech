@@ -12,16 +12,18 @@ class BaseController {
   }
 
   async getByText(req, res) {
-    const { searchText } = req.query;
+
+    const schema = paginationSchema(this.tableName);
+    const result = schema.safeParse(req.query);
     try {
-      const items = await this.service.getByText(searchText);
+      const items = await this.service.getByText(result.data);
       if (items.length === 0) {
         return res
           .status(404)
           .json({ message: "Nenhum registro encontrado!", items });
       }
 
-      return res.status(200).json({data: items});
+      return res.status(200).json(items);
     } catch (error) {
       return res
         .status(500)
@@ -101,7 +103,7 @@ class BaseController {
         error.code === "P2002"
       ) {
         console.error(`Error creating in ${this.tableName}:`, error);
-        return res.status(409).json({ message: `Duplicate entry in ${this.tableName}`, error: error.message });
+        return res.status(409).json({ message: `O ${error.meta.target}, já está em uso`, error: error.message});
       }
       console.error(`Error creating in ${this.tableName}:`, error);
       return res
@@ -121,7 +123,14 @@ class BaseController {
         .status(200)
         .json({ message: `${this.tableName} updated successfully` });
     } catch (error) {
-      console.log(`Error updating in ${this.tableName}`, error);
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === "P2002"
+      ) {
+        console.error(`Error updating in ${this.tableName}:`, error);
+        return res.status(409).json({ message: `O ${error.meta.target}, já está em uso`, error: error.message});
+      }
+      console.error(`Error updating in ${this.tableName}`, error);
       return res
         .status(500)
         .json({
