@@ -3,7 +3,6 @@ import {
   validationSchema,
 } from "../utils/validations/validation.js";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { parseISO, isValid, isBefore, isAfter, startOfToday } from "date-fns";
 
 class BaseController {
   constructor(service) {
@@ -13,9 +12,17 @@ class BaseController {
 
   async getByText(req, res) {
 
-    const schema = paginationSchema(this.tableName);
-    const result = schema.safeParse(req.query);
     try {
+      const schema = paginationSchema(this.tableName);
+      const result = schema.safeParse(req.query);
+
+      if (!result.success) {
+        return res
+          .status(400)
+          .json({ message: result.error.errors[0].message });
+      }
+
+
       const items = await this.service.getByText(result.data);
       if (items.length === 0) {
         return res
@@ -34,7 +41,7 @@ class BaseController {
   async getById(req, res) {
     const { id } = req.params;
     try {
-      const item = await this.service.getById(id);
+      const item = await this.service.getById({ id });
       if (item) {
         return res.status(200).json({data: item});
       }
@@ -50,6 +57,9 @@ class BaseController {
     try {
       const schema = paginationSchema(this.tableName);
       const result = schema.safeParse(req.query);
+
+      console.log(`req.query: ${JSON.stringify(req.query)}`)
+      console.log(`result: ${JSON.stringify(result.data)}`);
 
       if (!result.success) {
         return res
@@ -83,7 +93,7 @@ class BaseController {
         if (field.message === "Required") {
           return res
             .status(400)
-            .json({ message: `O ${field.path} é obrigatorio` });
+            .json({ message: `O campo '${field.path}' é obrigatório!` });
         }
         console.log(validate.error.errors);
         return res.status(400).json({ message: field.message });
@@ -103,15 +113,23 @@ class BaseController {
         error.code === "P2002"
       ) {
         console.error(`Error creating in ${this.tableName}:`, error);
-        return res.status(409).json({ message: `O ${error.meta.target}, já está em uso`, error: error.message});
+        return res.status(409).json({ message: `O ${error.meta.target}, já está em uso!`, error: error.message});
+      }else if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === "P2003"
+      ){
+        console.error(`Error creating in ${this.tableName}:`, error);
+        return res.status(400).json({ message: `Um campo de relação não existe!`, error: error.message});
+      }else{
+        console.error(`Error creating in ${this.tableName}:`, error);
+        return res
+          .status(500)
+          .json({
+            message: `Error creating in ${this.tableName}`,
+            error: error.message,
+          });
       }
-      console.error(`Error creating in ${this.tableName}:`, error);
-      return res
-        .status(500)
-        .json({
-          message: `Error creating in ${this.tableName}`,
-          error: error.message,
-        });
+
     }
   }
 
@@ -143,7 +161,7 @@ class BaseController {
   async delete(req, res) {
     const { id } = req.params;
     try {
-      await this.service.delete(id);
+      await this.service.delete({id});
 
       return res
         .status(200)

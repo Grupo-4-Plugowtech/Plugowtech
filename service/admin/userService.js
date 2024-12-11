@@ -1,71 +1,71 @@
 // import { userModels } from "../../models/user/userModels.js";
 import GenericModels from "../../models/genericModels.js";
 
-export const userService = {
-    getAllUsers: async (pagination) => {
-        console.log(JSON.stringify(pagination, null, 2));
-        try {
-            // Llamada al modelo con el parámetro recibido
-            const users = await userModels.getAll(pagination);
+// export const userService = {
+//     getAllUsers: async (pagination) => {
+//         console.log(JSON.stringify(pagination, null, 2));
+//         try {
+//             // Llamada al modelo con el parámetro recibido
+//             const users = await userModels.getAll(pagination);
 
-            return users;  // Devolvemos los usuarios
-        } catch (error) {
-            throw error;  // En caso de error, lo lanzamos nuevamente
-        }
-    },
+//             return users;  // Devolvemos los usuarios
+//         } catch (error) {
+//             throw error;  // En caso de error, lo lanzamos nuevamente
+//         }
+//     },
 
-    getUserById: async (id) => {
-        try {
-            const user = await userModels.getById(id);
-            return user;
-        } catch (error) {
-            throw error;
-        }
-    },
+//     getUserById: async (id) => {
+//         try {
+//             const user = await userModels.getById(id);
+//             return user;
+//         } catch (error) {
+//             throw error;
+//         }
+//     },
 
-    getUserByEmail: async (email) => {
-        try {
-            const user = await userModels.getByEmail(email);
+//     getUserByEmail: async (email) => {
+//         try {
+//             const user = await userModels.getByEmail(email);
 
-            return user;
+//             return user;
 
-        } catch (error) {
-            throw error;
-        }
-    },
+//         } catch (error) {
+//             throw error;
+//         }
+//     },
 
-    createUser: async (userData) => {
-        try {
-            // Validar datos antes de crear el usuario
-            // validateUserData(userData);
-            return await userModels.create(userData);
-        } catch (error) {
-            throw error;
-        }
-    },
+//     createUser: async (userData) => {
+//         try {
+//             // Validar datos antes de crear el usuario
+//             // validateUserData(userData);
+//             return await userModels.create(userData);
+//         } catch (error) {
+//             throw error;
+//         }
+//     },
 
-    updateUser: async (id, userData) => {
-        try {
-            // Validar datos antes de actualizar el usuario
-            // validateUserData(userData);
-            const updatedUser = await userModels.update(id, userData);
+//     updateUser: async (id, userData) => {
+//         try {
+//             // Validar datos antes de actualizar el usuario
+//             // validateUserData(userData);
+//             const updatedUser = await userModels.update(id, userData);
 
-            return updatedUser;
-        } catch (error) {
-            throw error;
-        }
-    },
+//             return updatedUser;
+//         } catch (error) {
+//             throw error;
+//         }
+//     },
 
-    deleteUser: async (id) => {
-        try {
-            const deletedUser = await userModels.delete(id);
+//     deleteUser: async (id) => {
+//         try {
+//             const deletedUser = await userModels.delete(id);
             
-            return deletedUser;
-        } catch (error) {
-            throw error;
-        }
-    }
-};
+//             return deletedUser;
+//         } catch (error) {
+//             throw error;
+//         }
+//     }
+// };
 
 
 class UserService {
@@ -77,9 +77,9 @@ class UserService {
         return this.model.tableName; // Exponemos el `tableName`
     }
 
-    async getByText(options){
+    async getByText(tableName){
         try {
-            const items = await this.model.getByText(options);
+            const items = await this.model.getByText(tableName);
 
             return items;
             
@@ -89,15 +89,16 @@ class UserService {
     }
 
     // Método para obtener todos los usuarios
-    async getAll({ skip, take, orderBy, order }) {
+    async getAll({ skip, take, orderBy, order, companyId }) {
 
-        console.log(`from UserService: skip: ${skip}, take: ${take}, orderBy: ${orderBy}, order: ${order}`)
+        console.log(`from UserService: skip: ${skip}, take: ${take}, orderBy: ${orderBy}, order: ${order}, companyId: ${companyId}`)
         try {
             return await this.model.getAll({
                 skip,
                 take,
                 orderBy,
                 order,
+                companyId,
                 include: {
                     company: {
                         select: {
@@ -112,9 +113,9 @@ class UserService {
     }
 
     // Método para obtener un usuario por su ID
-    async getById(id) {
+    async getById(whereParams) {
         try {
-            return await this.model.getById(id);
+            return await this.model.getById(whereParams);
         } catch (error) {
             throw error;
         }
@@ -139,9 +140,9 @@ class UserService {
     }
 
     // Método para eliminar un usuario
-    async delete(id) {
+    async delete(whereParams) {
         try {
-            return await this.model.delete(id);
+            return await this.model.delete(whereParams);
         } catch (error) {
             throw error;
         }

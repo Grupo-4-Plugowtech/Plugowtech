@@ -77,6 +77,10 @@ import userController from '../../../controllers/admin/usersController.js';
 export default async function usersHandlers(req, res){
     const { id } = req.params;
     const { searchText } = req.query;
+    // console.log(`req: ${stringify(req)}`);
+    // console.log(`IP del cliente: ${req.headers['x-forwarded-for'] || req.connection.remoteAddress}`);
+    // console.log(`IP del cliente: ${req.ip}`)
+
 
     switch (req.method) {
         case 'GET':

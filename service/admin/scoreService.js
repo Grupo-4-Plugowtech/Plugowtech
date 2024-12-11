@@ -1,18 +1,18 @@
+// import { userModels } from "../../models/user/userModels.js";
 import GenericModels from "../../models/genericModels.js";
 
-
-class CompanyService {
-    constructor(){
-        this.model = new GenericModels('company');
+class ScoreService {
+    constructor() {
+        this.model = new GenericModels('score');  // Aquí pasamos 'user' como nombre de la tabla
     }
-    
+
     get tableName() {
         return this.model.tableName; // Exponemos el `tableName`
     }
 
-    async getByText(options){
+    async getByText(tableName){
         try {
-            const items = await this.model.getByText(options);
+            const items = await this.model.getByText(tableName);
 
             return items;
             
@@ -22,15 +22,23 @@ class CompanyService {
     }
 
     // Método para obtener todos los usuarios
-    async getAll({ skip, take, orderBy, order }) {
+    async getAll({ skip, take, orderBy, order, companyId }) {
 
-        console.log(`from CompanyService: skip: ${skip}, take: ${take}, orderBy: ${orderBy}, order: ${order}`)
+        console.log(`from UserService: skip: ${skip}, take: ${take}, orderBy: ${orderBy}, order: ${order}, companyId: ${companyId}`)
         try {
             return await this.model.getAll({
                 skip,
                 take,
                 orderBy,
                 order,
+                companyId,
+                include: {
+                    company: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
             });
         } catch (error) {
             throw error;
@@ -74,4 +82,4 @@ class CompanyService {
     }
 }
 
-export default new CompanyService();
+export default new ScoreService();

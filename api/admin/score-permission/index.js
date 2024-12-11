@@ -1,45 +1,25 @@
-// import { scorePermissionService } from "../../../models/scorePermission/scorePermissionService.js";
-// import { paginationSchema } from "../../../utils/validations/validation.js";
+import scorePermissionController from "../../../controllers/admin/scorePermissionController.js";
 export default async function scorePermissionHandler(req, res){
-    
+    const { id } = req.params;
+    const { searchText } = req.query;
 
-    switch(req.method){
+    switch (req.method) {
         case 'GET':
-            try{
-                const schema = paginationSchema("scorePermission")
-                const pagination = schema.safeParse(req.query);
-
-                if(!pagination.success){
-                    return res.status(400).json({ message: pagination.error.errors[0].message });
-                }
-                console.log(pagination);
-                const scorePermissions = await scorePermissionService.getAllSP(pagination.data);
-                return res.status(200).json(scorePermissions)
-            }catch(error){
-                return res.status(500).json({message: 'Internal Server Error', error: error.message});
-            }
-
-        case 'POST':
-            try {
-                
-            } catch (error) {
-                
-            }
+          if (id) {
+            return scorePermissionController.getById(req, res);
+          }else if(searchText){
+            return scorePermissionController.getByText(req, res);
+          }else {
+            return scorePermissionController.getAll(req, res);
+          }
+        // case 'POST':
+        //   return scorePermissionController.create(req, res);
         case 'PUT':
-            try {
-                
-            } catch (error) {
-                
-            }
+          return scorePermissionController.update(req, res);
         case 'DELETE':
-            try {
-                
-            } catch (error) {
-                
-            }
+          return scorePermissionController.delete(req, res);
         default:
-            return res.status(405).json({message: 'Method Not Allowed'});
-    }
+          return res.status(405).json({ message: 'Method Not Allowed' });
+      }
 
-
-}
+};

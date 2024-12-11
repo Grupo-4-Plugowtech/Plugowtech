@@ -28,8 +28,8 @@ model User {
   accessLogs       AccessLog[]
   scores           Score[]
   scorePermissions ScorePermission[]
-  company          Company           @relation(fields: [companyId], references: [id])
-  profession       Profession?       @relation(fields: [professionId], references: [id])
+  company          Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  profession       Profession?       @relation(fields: [professionId], references: [id], onDelete: Cascade)
 }
 
 model Profession {
@@ -56,30 +56,33 @@ model Company {
 }
 
 model Score {
-  id          String   @id @default(uuid())
-  userId      String
-  points      Int
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  deletedAt   DateTime?
-  companyId   String
-  company     Company  @relation(fields: [companyId], references: [id])
-  user        User     @relation(fields: [userId], references: [id])
+  id                  String   @id @default(uuid())
+  userId              String
+  companyId           String
+  scorePermissionId   String   @unique
+  points              Int
+  description         String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  deletedAt           DateTime?
+  company             Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scorePermission     ScorePermission  @relation(fields: [scorePermissionId], references: [id], onDelete: Cascade)
 }
 
 model ScorePermission {
   id          String     @id @default(uuid())
-  companyId   String
   userId      String
+  companyId   String
   points      Int
-  status      StatusType
+  status      StatusType @default(pending)
   description String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   deletedAt   DateTime?
-  company     Company    @relation(fields: [companyId], references: [id])
-  user        User       @relation(fields: [userId], references: [id])
+  company     Company    @relation(fields: [companyId], references: [id], onDelete: Cascade )
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  score       Score?
 }
 
 model ImagesCompany {
@@ -92,17 +95,17 @@ model ImagesCompany {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   deletedAt   DateTime?
-  company     Company  @relation(fields: [companyId], references: [id])
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
 }
 
 model AccessLog {
   id        String   @id @default(uuid())
-  userId    String
+  userId    String?
   ipAddress String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   deletedAt DateTime?
-  user      User     @relation(fields: [userId], references: [id])
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
 }
 
 enum Role {

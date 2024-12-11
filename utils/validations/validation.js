@@ -20,12 +20,64 @@ const brazilAreaCodes = [
   "91", "92", "93", "94", "95", "96", "97", "98", "99" // Norte
 ];
 
+// Options for query by "OrderBy" in tables
 const orderByOptions = {
-  user: z.enum(['cpf', 'city', 'birth_date', 'approved_terms', 'role', 'companyId', 'createdAt']).optional().default('createdAt'),
-  scorePermission: z.enum(['company', 'points', 'status', 'createdAt']).optional().default('createdAt'),
-  company: z.enum(['email', 'cnpj', 'name', 'createdAt']).optional().default('createdAt'),
+  user: z.enum(['cpf', 'city', 'birth_date', 'approved_terms', 'companyId', 'createdAt']).default('createdAt'),
+  company: z.enum(['email', 'cnpj', 'name', 'createdAt']).default('createdAt'),
+  scorePermission: z.enum(['companyId', 'points', 'createdAt']).default('createdAt'),
+  accessLog: z.enum(['userId', 'ipAddress', 'createdAt']).default('createdAt'),
+  score: z.enum(['points', 'userId', 'createdAt']).default('createdAt'),
 }
 
+const tables = {
+  user: {
+    queryfields: [
+      { field: "name", mode: "insensitive", type: "string" },
+      { field: "lastname", mode: "insensitive", type: "string" },
+      { field: "email", mode: "insensitive", type: "string" },
+      { field: "city", mode: "insensitive", type: "string" },
+      { field: "companyId", mode: "insensitive", type: "string" },
+      { field: "role", mode: "insensitive", type: "enum" },
+      { field: "phone", type: "string" },
+      { field: "cpf", type: "string" },
+    ],
+    relationShips: {
+
+    },
+    enum: {
+      role: ["company", "admin", "associated"],
+    }
+  },
+  company: {
+    queryfields: [
+        { field: "email", mode: "insensitive", type: "string" },
+        { field: "cnpj", mode: "insensitive", type: "string" },
+        { field: "name", mode: "insensitive", type: "string" },
+    ],
+    enum: [],
+  },
+  scorePermission: {
+    queryfields: [
+        { field: "companyId", mode: "insensitive", type: "string" },
+        { field: "points", type: "number" },
+        { field: "status", mode: "insensitive", type: "enum" },
+    ],
+    enum: {
+      status: ["pending", "approved", "rejected"],
+    }
+  },
+  accessLog: {
+    queryfields: [],
+    enum: []
+  },
+  score: {
+    queryfields: [
+      { field: "points", type: "number" },
+    ],
+    enum: []
+  },
+};
+// Schema for validation data inputed
 const schema = {
   user: z.object({
     name: z.string().min(1, { message: "O nome é obrigatorio" }),
@@ -68,33 +120,101 @@ const schema = {
       //   });
       // }
   // }),
-    
-
-  })
+  }),
+  score: z.object({
+    points: z.number().min(0, "Os pontos devem ser um número positivo!"),
+    userId: z.string().min(32, { message: "O usuário para o vinculo é obrigadorio!"} ),
+    companyId: z.string().min(32, { message: "A empresa para o vinculo é obrigadorio!"} ),
+    scorePermissionId: z.string().min(32, { message: "O vinculo com a permissão de pontos é obrigatoria!"} ),
+    description: z.string().min(1, { message: "A descrição é um campo obrigatorio!"}),
+  }),
   
 }
 
-export const paginationSchema = (option) => {
+export const paginationSchema = (tableName) => {
 
-    if (!orderByOptions[option]) {
-      throw new Error(`Invalid option for orderBy: ${option}`);
-    }
+  if (!orderByOptions[tableName] || !tables[tableName]) {
+    throw new Error(`Parametros de ordenação ou de consultas não definidos, em: ${tableName}!`);
+  }
+
+  const orderByFields = orderByOptions[tableName];
+  const queryFields = tables[tableName]?.queryfields;
+
+  console.log(queryFields)
+
     return z.object({
       skip: z.preprocess((value) => (value === undefined || value === null ? 0 : parseInt(value, 10)), z.number().int().nonnegative().optional()),
       take: z.preprocess((value) => (value === undefined || value === null ? 5 : parseInt(value, 10)), z.number().int().positive().min(1).max(100, { message: "Take value must be between 1 and 100" })),
-      orderBy: orderByOptions[option],
+      orderBy: orderByFields,
       order: z.enum(['asc', 'desc']).optional().default('desc'),
       searchText: z.string().optional(),
-    });
+      companyId: z.string().optional(),
+    }).transform((data) => {
+      const { orderBy, searchText, ...rest } = data;
+      console.log(data)
+  
+      // Buscar los detalles del campo seleccionado en `queryfields`
+      // const fieldDetails = queryFields.map((field) => {
+      //   if (field.field === orderBy){
+      //     return field
+      //   }else
+      //   return
+      // }).filter((field) => field)
 
-} 
+      
+
+        const filters = queryFields.map((config) => {
+        const { field, mode, type } = config;
+      
+        if (type === "string") {
+          return {
+            [field]: {
+              startsWith: searchText,
+              ...(mode && { mode }),
+            },
+          };
+        }
+      
+        if (type === "number") {
+          const numericValue = Number(searchText);
+          if (!isNaN(numericValue)) {
+            return {
+              [field]: { equals: numericValue }, // Solo busca si es un número válido
+            };
+          }
+        }
+      
+        if (type === "enum" && tables[tableName].enum?.[field]?.includes(searchText)) {
+          return {
+            [field]: { equals: searchText }, // Búsqueda exacta para enums
+          };
+        }
+      
+        return null; // Ignora campos que no tienen un tipo definido
+      }).filter(Boolean); // Elimina los filtros nulos
+  
+      if (!queryFields) {
+        throw new Error(`The field "${orderBy}" is not a valid queryable field for table "${tableName}".`);
+      }
+      console.log(`filters: ${JSON.stringify(filters, null, 2)}`)
+      // Retornar la estructura con detalles del campo y los datos validados
+      return {
+        ...rest,
+        orderBy,
+        filters,
+        searchText
+      };
+    });
+  };
+
+
 
 function validatePhoneBR(value, ctx){
 
     if (!value) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "O número de telefone é obrigatorio)",
+        message: "O número de telefone é obrigatorio"
       });
       return;
     }
