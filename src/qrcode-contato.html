@@ -90,7 +90,7 @@
     }
 
     .conteudo {
-        width: 35%;
+        width: 50%;
         height: auto;
         color: aliceblue;
         background-color: rgba(0, 0, 0, 0.7);
@@ -99,7 +99,6 @@
     #qrcode-h1{
         font-size: 3rem;
         font-weight: 100;
-        
         width: 100%;
     }
 
@@ -108,7 +107,8 @@
     }
 
     .image {
-        width: 60%;
+        padding-top: 5%;
+        width: 50%;
         height: auto;
         display: flex;
         justify-content: center;
@@ -118,9 +118,12 @@
         width: 70%;
     }
 
-    @media (max-width: 1340px){
+    @media (max-width: 1100px){
         .container {
             flex-direction: column;
+            width: 80%;
+            height: auto;
+            align-items: center;
         }
 
         #qrcode-h1 {
@@ -132,10 +135,61 @@
         }
 
         .conteudo {
-        display: none;
-
-        
+            flex-direction: column;
+            width: 100%;
+            height: auto;
+        }
     }
+
+    @media (max-width: 760px){
+
+        .container {
+            padding-top: 8%;
+        }
+
+        .logo img {
+            display: none;
+        }
+
+        .h1-cabeçalho {
+            display: none;
+        }
+
+        .image {
+            width: 70%;
+            height: auto;
+        }
+    }
+
+    @media (max-width: 460px) {
+        .container {
+            width: 100%;
+            height: auto;
+            align-items: center;
+        }
+
+        .conteudo {
+            width: 80%;
+            height: auto;
+        }
+
+        .image {
+            width: 80%;
+            height: auto;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        #qrcode-h1 {
+            font-size: 20px;
+        }
+
+        #qrcode-h2 {
+            font-size: 30px;
+        }
     }
 
 </style>
@@ -161,7 +215,7 @@
                 <h2 id="qrcode-h2">PARTNERSHIP</h2>
             </div>
             <div class="image">
-                <img src="imagens/qrcode.svg" alt="">
+                <img src="imagens/contato.svg" alt="">
             </div>
         </div>
     </main>
