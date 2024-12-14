@@ -7,10 +7,22 @@
   <link href="/src/output.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 flex flex-col items-center p-4">
-  <!-- Logo -->
-  <header class="flex flex-col items-center mb-8">
-    <img src="/src/img/logo.png" alt="Logo" class="h-17 w-auto mb-4">
+  <header class="bg-gray-800 text-gray-700">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <img src="/src/img/logo-pequena.svg" alt="Logo" class="h-3 w-auto mb-2">
+      <div class="flex justify-between items-center ">
+        <ul>
+          <a href="cadastro-profissional-eng.html" class="hover:text-gray-400 px-6 mx-4">Engenheiro(a)</a>
+          <a href="cadastro-profissional-arquiteto.html" class="hover:text-gray-400 px-6 mx-4">Arquiteto(a)</a>
+          <a href="cadastro-profissional-designer.html" class="hover:text-gray-400 px-6 mx-4">Designer de Interiores(a)</a>
+          <a href="cadastro-profissional-consultor.html" class="hover:text-gray-400 px-6 mx-4">Consultor(a)</a>
+        </ul>
+      </div>
+  
+    </div>
+
   </header>
+  
 
   <!-- Formulário -->
   <main class="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl">
@@ -70,5 +82,16 @@
       </div>
     </form>
   </main>
+
+  <script>
+    // Script para alternar o menu mobile
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+  
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden'); // Alterna a classe "hidden"
+    });
+  </script>
+
 </body>
 </html>
