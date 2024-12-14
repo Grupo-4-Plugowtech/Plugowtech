@@ -1,0 +1,961 @@
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: #2C2C2C;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+}
+
+.cabecalho {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 655px;
+    background-image: url('../imagens/banner.svg');/* Caminho para o SVG */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo do header */
+header {
+    display: flex;                   /* Flexbox para alinhamento */
+    justify-content: space-between;  /* Espaço entre a logo e o menu */
+    align-items: center;             /* Alinha verticalmente */
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    padding: 1em 2em;                /* Espaçamento interno */
+    position: sticky;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;          /* Inclui padding na largura total */
+}
+
+/* Estilo da logo */
+.logo img {
+    height: 6rem;  
+    margin-left: 2rem;                  /* Ajuste a altura conforme necessário */
+}
+
+/* Estilo do menu */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;               /* Espaçamento entre os itens do menu */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #f0a500;                  /* Cor ao passar o mouse */
+}
+
+/*seção do banner*/
+.conteudo-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 2rem;
+}
+
+.conteudo h1 {
+    font-family: "Montserrat";
+    font-size: 48px;
+    margin-bottom: 30px;
+    margin-top: 150px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+.conteudo p {
+    font-family: "Montserrat";
+    font-size: 38px;
+    font-weight: 200;
+}
+
+/*seção do sobre*/
+.sobre {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sobre-partnership {
+    width: 75%;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.conteudo-sobre {
+    width: 73%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: #FFFFFF;
+    padding-bottom: 10%;
+    padding-top: 10%;
+}
+
+.conteudo-sobre h1 {
+    font-size: 26px;
+    letter-spacing: 2px;
+}
+
+.conteudo-sobre p {
+    font-size: 24px;
+    font-family: "Montserrat";
+}
+
+/*seção da parceria*/
+.parceria {
+    background-image: url('../imagens/imagem-parceria.svg');
+    background-size: cover; /* Ajusta a imagem para cobrir o elemento mantendo a proporção */
+    background-position: center; /* Centraliza a imagem dentro do elemento */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.secao-parceria {
+    width: 75%;
+    height: auto;
+}
+
+.secao-parceria h1 {
+    font-size: 26px;
+    letter-spacing: 2px;
+    margin-bottom: 4rem;
+    text-align: center;
+    padding-top: 10%;
+}
+
+.secao-parceria p {
+    font-size: 22px;
+    font-family: "Montserrat";
+    padding-bottom: 25%;
+}
+
+/*seção da campanha*/
+.campanha {
+    width: 100%;
+    height: auto;
+    color: #FFFFFF;
+    background-color: rgb(57, 83, 171); 
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 100px;
+    font-family: "Montserrat";
+    padding-bottom: 2%;
+}
+
+.container-campanha {
+    width: 80%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    /*background-color: rgb(57, 83, 171);*/
+}
+
+.sobre-campanha {
+    width: 48%;
+    height: auto;
+    margin: 0;
+}
+
+.conteudo-campanha h1 {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin-bottom: 2.2rem;
+}
+
+/*segunda parte da campanha*/
+/*.container-participar {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+}*/
+
+.participar {
+    width: 48%;
+    height: auto;
+    margin: 1rem, 0;
+}
+
+.partc-h1 {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.quem-pode-participar {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.conteudo-participar {
+    width: 30%;
+    height: auto;
+
+}
+
+.imagem-participar {
+    width: 60%;
+
+}
+
+.imagem-participar img {
+    width: 100%;
+}
+
+/*seção da premiação*/
+.premiacao {
+    background-image: url(../imagens/imagem-premiacao.svg);
+    background-size: cover; /* Ajusta a imagem para cobrir o elemento mantendo a proporção */
+    background-position: center; /* Centraliza a imagem dentro do elemento */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: end;
+}
+
+.sobre-premiacao {
+    width: 60%;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.conteudo-premiacao {
+    max-width: 60%;
+}
+
+.conteudo-premiacao h1 {
+    margin-top: 8%;
+    /*margin-left: 6rem;*/
+    font-size: 42px;
+    font-family: "Montserrat";
+    font-weight: 300;
+    padding-top: 5%;
+}
+
+.conteudo-premiacao p {
+    font-size: 24px;
+    font-family: "Montserrat";
+    letter-spacing:  1px;
+}
+
+#inportante {
+    font-size: 16px;
+    letter-spacing:  1px;
+    padding-bottom: 15%;
+}
+
+/*seçaõ do acelera-partnership*/
+.acelera-partnership {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+    color: #FFFFFF;
+    font-family: "Montserrat";
+}
+.acelera-h1{
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 200;
+}
+
+.sobre-acelera {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5%;
+}
+
+.conteudo1-acelera {
+    width: 40%;
+    height: auto;
+    gap: 20px;
+    font-size: 24px;
+    margin: 20px;
+}
+
+.conteudo2-acelera {
+    width: 40%;
+    height: auto;
+    gap: 20px;
+    font-size: 24px;
+    margin: 20px;
+}
+
+/*seção do carrousel*/
+.container {
+    position: relative;
+    /*max-width: 1000px;*/
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    padding-bottom: 5%;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.indicators .dot {
+    width: 10px;
+    height: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.indicators .dot.active {
+    background-color: #fff;
+}
+
+/*section class="viagens"*/
+.viagens {
+    width: 100%;
+    height: 600px;
+    background-image: url(../imagens/imagem-viagem2.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo-viagem {
+    max-width: 74%;
+    color: #000;
+    font-size: 48px;
+    font-family: "Montserrat";
+}
+
+.conteudo-viagem h1 {
+    font-weight: 300;
+    text-align: center;
+}
+
+/*seção dos cards*/
+.cards {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.container-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite quebrar linha */
+    gap: 20px; /* Espaço entre os cards */
+    margin-top: 2rem;
+}
+
+.card {
+    width: 360px;
+    height: 485px;
+    background-color: #f0f0f0;
+    border: 1px solid #2C2C2C;
+    box-sizing: border-box;
+    border-radius: 15px;
+    transition: transform 0.3s, box-shadow 0.3s; /* Transições suaves */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra padrão suave */
+}
+
+/* Efeito hover */
+.card:hover {
+    transform: translateY(-10px); /* Eleva o card */
+    box-shadow: 0 5px 10px rgb(246, 235, 19); /* Sombra mais pronunciada */
+    border: 1px solid #555555; /* Destaque na borda ao passar o mouse */
+}
+  
+.card-image img {
+    width: 100%; /* Ocupa toda a largura do card */
+    /*height: 191px; /* Mantém a altura que você definiu */
+    background-size: cover; /* Ajusta a imagem para cobrir o espaço */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+}
+
+.card-image {
+    width: 100%;
+    height: 191px;
+    background-color: #f0f0f0;
+    border-top-left-radius: 15px; /* Para coincidir com o card */
+    border-top-right-radius: 15px;
+}
+
+.card-text {
+    width: 100%; /* Ocupa toda a largura disponível */
+    padding: 20px; /* Espaçamento interno */
+    flex: 1; /* Permite que o conteúdo cresça e ocupe o espaço restante */
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.card-text p {
+    font-size: 14px;
+    font-family: "Montserrat";
+}
+
+.card-text h2 {
+    font-weight: 300;
+    line-height: 2%;
+}
+
+#pts {
+    font-weight: bold;
+}
+
+/*seção dos produtos e parceiros*/
+.fornecedores-parceiros {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container-fornecedores-parceiros {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-fornecedores-parceiros h1 {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 48px;
+    font-family: "Montserrat";
+    padding-top: 4%;
+}
+
+.produtos .fornecedores {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.image-produtos {
+    display: flex;
+    justify-content: center;
+}
+
+.image-produtos img {
+    width: 90%;
+    margin-bottom: -.3rem;
+}
+
+.image-fornecedores {
+    display: flex;
+    justify-content: center; 
+}
+
+.image-fornecedores img {
+    width: 90%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5*/
+/* Estilos para o menu dropdown */
+.dropdown-content {
+    display: none;                     /* Esconde o submenu */
+    position: absolute;                /* Posiciona em relação ao item pai */
+    background-color: rgba(0, 0, 0, 0.9);
+    min-width: 150px;
+    z-index: 1;
+    border-radius: 5px;                /* Borda arredondada opcional */
+    padding: 0;                        /* Remove padding padrão */
+}
+
+.dropdown-content li {
+    margin: 0;                         /* Remove o espaçamento entre itens */
+    border-bottom: 1px solid #444;     /* Linha entre itens */
+}
+
+.dropdown-content li:last-child {
+    border-bottom: none;               /* Remove a linha do último item */
+}
+
+.dropdown-content a {
+    padding: 10px 15px;
+    display: block;                    /* Faz os links preencherem a largura */
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0a500;         /* Cor ao passar o mouse */
+    color: black;                      /* Ajusta a cor do texto */
+}
+
+/* Exibe o submenu ao passar o mouse */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Menu oculto em telas pequenas */
+.menu {
+    display: flex; /* Padrão para telas maiores */
+    flex-direction: row;
+}
+
+.menu-toggle {
+    display: none; /* Esconde o botão em telas grandes */
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Estilo para telas pequenas */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Esconde o menu inicialmente */
+        flex-direction: column; /* Alinha itens verticalmente */
+        position: absolute;
+        top: 70px; /* Ajuste baseado na altura do header */
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        width: 100%; /* Preenche toda a largura */
+        padding: 1em 0;
+    }
+
+    nav ul.menu.open {
+        display: flex; /* Mostra o menu ao abrir */
+    }
+
+    .menu-toggle {
+        display: block; /* Exibe o botão de hambúrguer */
+    }
+}
+
+/*Até 860px*/
+@media (max-width: 860px){
+    .logo img {
+        height: 6rem; 
+        
+    }
+
+    .conteudo h1 {
+        font-size: 38px;
+    }
+    
+    .conteudo p {
+        font-size: 28px;
+    }
+
+    /*sobre*/
+    .conteudo-sobre h1 {
+        font-size: 22px;
+        letter-spacing: 2px;
+    }
+    
+    .conteudo-sobre p {
+        font-size: 20px;
+        font-family: "Montserrat";
+    }
+
+    .imagem-sobre img {
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /*parcerias*/
+    .secao-parceria h1 {
+        font-size: 22px;
+        letter-spacing: 2px;
+        margin-bottom: 4rem;
+        text-align: center;
+    }
+    
+    .secao-parceria p {
+        font-size: 20px;
+        font-family: "Montserrat";
+    }
+
+    /*campanha*/
+    .quem-pode-participar {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .partc-h1{
+        font-size: 100%;
+    }
+
+    .conteudo-participar {
+        width: 100%;
+        height: auto;
+        margin-top: 2.2rem;
+    }
+    
+    .imagem-participar {
+        width: 100%;
+    }
+    
+    .imagem-participar img {
+        width: 100%;
+    }
+
+    /*premiação*/
+    .sobre-premiacao {
+        width: 80%;
+    }
+
+    .conteudo-premiacao h1 {
+        font-size: 32px;
+    }
+    
+    .conteudo-premiacao p {
+        font-size: 22px;
+    }
+
+    /*acelera*/
+    .sobre-acelera {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 8px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .conteudo1-acelera {
+        width: 80%;
+        font-size: 22px;
+        margin: 0;
+    }
+    
+    .conteudo2-acelera {
+        width: 80%;
+        font-size: 22px;
+        margin: 0;  
+        padding: 0;
+    }
+    .acelera-h1 h1 {
+        font-family: "Montserrat";
+        letter-spacing: 3px;
+
+    }
+
+    /*viagem*/
+    .conteudo-viagem {
+        max-width: 82%;
+        color: #000;
+        font-size: 38px;
+        font-family: "Montserrat";
+        
+    }
+ 
+    .conteudo-viagem h1 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .conteudo-viagem p {
+        width: 100%;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+    }
+    
+}
+/*telas de até 500px*/
+@media (max-width: 505px){
+
+    .banner {
+        width: 100%;
+    }
+
+    .conteudo-banner {
+        width: 100%;
+    }
+
+    .conteudo h1 {
+        width: 100%;
+        font-size: 32px;
+        margin-top: 40px;
+    }
+    
+    .conteudo p {
+        font-size: 28px;
+    }
+
+    .sobre-premiacao {
+        width: 100%;
+    }
+    
+    .conteudo-premiacao {
+        max-width: 80%;
+    }
+
+    .conteudo-viagem h1 {
+        width: 100%;
+        text-align: center;
+        font-size: 42px;
+    }
+
+    .conteudo-viagem p {
+        width: 100%;
+        font-size: 28px;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        margin-left: 7%;
+    }
+
+    .acelera-h1{
+        width: 100%;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 200;
+        margin: 0;
+    }
+
+    .sobre-acelera {
+        padding-bottom: 8%;
+        margin: 0;
+    }
+
+    .logo img {
+        height: 6rem;
+        margin-left: 5%;  
+    }
+
+    .cards {
+        width: 100%;
+        align-items: center;
+    }
+
+    .card {
+        width: 96%;
+    }
+
+    .container-fornecedores-parceiros h1 {
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 28px;
+        font-family: "Montserrat";
+        padding-top: 4%;
+    }
+
+}
+
+@media (max-width: 790px) {
+    .container-campanha {
+        width: 80%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+        flex-direction: column;
+    }
+
+    .participar {
+        width: 100%;
+        height: auto;
+        margin: 1rem, 0;        
+    }
+
+    .sobre-campanha {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+}
+
+/*tlas menores*/
+@media (max-width: 380px){
+    
+    .sobre-acelera {
+        font-size: 18px;
+        padding-bottom: 8%;
+        margin: 0;
+    }
+
+    .card {
+        width: 96%;
+        height: 485px;
+    }
+
+    #card-h2 {
+        font-size: 18px;
+    }
+    /*premiação*/
+    .sobre-premiacao {
+        width: 100%;
+    }
+    
+    .conteudo-premiacao {
+        max-width: 80%;
+    }
+    
+    .conteudo-premiacao h1 {
+        margin-top: 8%;
+        font-size: 32px;
+    }
+    
+    .conteudo-premiacao p {
+        font-size: 22px;
+        letter-spacing:  1px;
+    }
+
+    .participar {
+        width: 80%;
+         
+    }
+
+    .container-campanha  {
+        height: auto;
+    }
+
+    .sobre-campanha {
+        height: auto;
+    }
+    
+
+}
+
+/*footer*/
+footer {
+    background-color: #333; /* Fundo escuro */
+    color: #fff; /* Texto branco */
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 14px;
+  }
+
+  .social-links {
+    margin-bottom: 10px;
+  }
+
+  .social-links a {
+    margin: 0 10px;
+    display: inline-block;
+  }
+
+  .social-links img {
+    width: 24px; /* Tamanho dos ícones */
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  .social-links a:hover img {
+    transform: scale(1.2); /* Amplia levemente ao passar o mouse */
+  }
+
+  p {
+    margin: 0;
+}
