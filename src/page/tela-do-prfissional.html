@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/src/output.css" rel="stylesheet">
+
+    <title>Tela de pontos do Profissional</title>
+</head>
+<body>
+    <div class="flex flex-col md:flex-row items-start justify-center min-h-screen bg-gray-100 md:gap-x-6">
+        <!-- Seção de Prêmios Acelera Partnership -->
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full lg:mr-8">
+          <h2 class="text-lg font-semibold text-gray-700 mb-4">Prêmios Acelera Partnership</h2>
+          <ul class="list-disc pl-5 text-sm text-gray-600">
+            <li>A partir de 250.000 pontos: Viagem para Foz do Iguaçu</li>
+            <li>A partir de 300.000 pontos: Buenos Aires</li>
+            <li>A partir de 450.000 pontos: Ushuaia</li>
+            <li>A partir de 700.000 pontos: Croácia ou Milão</li>
+            <li>A partir de 800.000 pontos: Paris</li>
+            <li>A partir de 900.000 pontos: Orlando, na Flórida</li>
+            <li>A partir de 1.000.000 pontos: Japão</li>
+            <li>A partir de 1.500.000 pontos: Salone Del Mobile, em Milão</li>
+          </ul>
+        </div>
+      
+        <!-- Seção de saudação e barra de progresso -->
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full lg:ml-8">
+          <!-- Foto do cliente -->
+          <div class="flex justify-center lg:justify-end mb-4">
+            <img 
+              src="/src/img/joao.svg" 
+              alt="Foto do cliente" 
+              class="w-24 h-24 rounded-full border-2 border-blue-500"
+            />
+          </div>
+          <!-- Saudação -->
+          <h1 class="text-2xl font-semibold text-gray-700 mb-6 text-center lg:text-right">
+            Olá, <span id="user-name" class="text-blue-500">[Nome do Usuário]</span>!
+          </h1>
+          <!-- Barra de progresso geral -->
+          <div class="mb-6">
+            <p class="text-sm text-gray-600">Progresso geral:</p>
+            <div class="w-full bg-gray-200 rounded-full h-4">
+              <div
+                id="progress-bar"
+                class="bg-green-500 h-4 rounded-full"
+                style="width: 60%"
+              ></div>
+            </div>
+            <p class="text-right text-sm text-gray-600 mt-1">
+              <span id="current-points">600</span> / <span id="total-points">1000</span>
+            </p>
+          </div>
+          <!-- Botão para mais informações -->
+          <div class="text-center lg:text-right mt-6">
+            <button
+              class="bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+            >
+              Ver Mais Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <script>
+        // Simulação de dados dinâmicos
+        const userName = "João"; // Nome do usuário
+        const currentPoints = 600.000; // Pontos atuais
+        const totalPoints = 700.000; // Pontos necessários para o próximo prêmio
+      
+        // Atualizando os elementos na tela
+        document.getElementById("user-name").textContent = userName;
+        document.getElementById("current-points").textContent = currentPoints;
+        document.getElementById("total-points").textContent = totalPoints;
+        document.getElementById("progress-bar").style.width = `${(currentPoints / totalPoints) * 100}%`;
+      </script>
+      
+</body>
+</html>
