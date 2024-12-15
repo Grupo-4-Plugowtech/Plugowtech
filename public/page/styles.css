@@ -1,0 +1,8 @@
+/* src/styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f0f0f0;
+}
