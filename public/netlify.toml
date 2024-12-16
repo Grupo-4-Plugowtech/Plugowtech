@@ -1,7 +1,3 @@
-[build]
-publish = "public"  # Altere para o diretório onde estão os arquivos HTML e CSS
-command = "npm run build"  # Ajuste este comando caso seu projeto não tenha um script de build
-
 [[redirects]]
 from = "/*"
 to = "/index.html"
