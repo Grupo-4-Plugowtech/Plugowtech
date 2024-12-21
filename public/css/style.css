@@ -602,18 +602,57 @@ img {
 }
 
 /* Menu oculto em telas pequenas */
-.menu {
-    display: flex; /* Padrão para telas maiores */
-    flex-direction: row;
+.nav-mobile {
+    display: none;
+    position: relative;
 }
 
 .menu-toggle {
-    display: none; /* Esconde o botão em telas grandes */
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: white;
+    font-size: 44px;
     cursor: pointer;
+    padding: 10px;
+    /*background-color: #333;*/
+    color: white;
+}
+
+.menu-mobile {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    list-style: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 10px;
+    width: 150px;
+    z-index: 1000;
+}
+
+.menu-mobile li {
+    padding: 0;
+}
+
+.menu-mobile li a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-mobile li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Mostra o menu quando o mouse passa pelo botão */
+.nav-mobile:hover .menu-mobile {
+    display: block;
+}
+
+.menu-mobile:hover {
+    display: block;
 }
 
 /* Estilo para telas pequenas */
@@ -629,12 +668,17 @@ img {
         padding: 1em 0;
     }
 
-    nav ul.menu.open {
-        display: flex; /* Mostra o menu ao abrir */
+    .menu {
+        display: none; /* Esconde o menu no mobile */
     }
 
-    .menu-toggle {
-        display: block; /* Exibe o botão de hambúrguer */
+    .nav-mobile {
+        display: block; /* Mostra o menu hambúrguer no mobile */
+    }
+
+    .title {
+        text-align: center;
+        flex-grow: unset; /* Remove o comportamento de crescimento no mobile */
     }
 }
 
